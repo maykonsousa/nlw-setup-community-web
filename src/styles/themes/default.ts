@@ -6,7 +6,7 @@ export const Default: DefaultTheme = {
     title: 'default',
     colors: {
     'rocketseat-light': '#996DFF',
-    'rocketseat-mid': '#8257E5',
+    'rocketseat-mid': '#',
     'rocketseat-dark': '#633BBC',
     'rocketseat-low': '#271A45',
     'discover-light': '#6A80FF',
