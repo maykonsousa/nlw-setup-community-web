@@ -7,7 +7,15 @@ display: grid;
 grid-template-columns: 1fr 1fr;
 align-items: center;
 justify-content: space-between;
+padding: 2rem;
+
+
 gap: 3rem;
+
+@media (max-width: 768px) {
+  display: flex;
+  flex-direction: column;
+}
 `;
 
 export const SignInContent = styled.div`
@@ -16,7 +24,12 @@ display: flex;
 flex-direction: column;
 align-items: center;
 gap: 2rem;
-h1 {
+
+
+
+
+
+> h1 {
    margin-top: -3.5rem;
   color: ${({theme})=>theme.colors["text-title"]};
   font-weight: 900;
@@ -52,18 +65,149 @@ h1 {
   }
 }
 
-p {
+> p {
     font-size: 2rem;
     text-align: center;
     color: ${({ theme }) => theme.colors["text-base"]};
     span {
        background-image: linear-gradient(90deg,#857bf8,#54e694);
-       -webkit-background-clip: text;
-         -webkit-text-fill-color: transparent;
-         font-weight: 700;
+       background-clip: border-box;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
     }
 }
-    
+ 
 
+@media (max-width: 768px) {
+  p {
+    display: none;
+  }
+
+  img {
+    width: 90%;
+  }
+  
+}
     
+`;
+
+export const SignInForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+   p {
+    font-size: 1.5rem;
+    color: ${({ theme }) => theme.colors["text-base"]};
+    
+  }
+  > h1 {
+    color: ${({ theme }) => theme.colors["text-title"]};
+    font-weight: 700;
+    font-size: 3.5rem;
+
+  }
+  form {
+    margin-top: 2rem;
+    width: 30rem;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    gap: 1rem;
+
+   div {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap:0.5rem;
+       label {
+        width: fit-content;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 700;
+      span {
+        display: inline;
+        white-space: nowrap;
+        
+      }
+      color: ${({ theme }) => theme.colors["grey-100"]};
+
+    }
+
+    input {
+      width: 100%;
+      height: 3rem;
+      border: 0;
+      outline: 0;
+      border-radius: 8px;
+      padding: 0 1rem;
+      background-color: ${({ theme }) => theme.colors["shape-primary"]};
+      font-size: 1.5rem;
+      color: ${({ theme }) => theme.colors["text-base"]};
+
+    }
+   }
+
+    button {
+      width: 100%;
+      height: 3rem;
+      border: 0;
+      outline: 0;
+      border-radius: 8px;
+      padding: 0 1rem;
+      background-color: ${({ theme }) => theme.colors["button-bg"]};
+      font-size: 1.5rem;
+      color: ${({ theme }) => theme.colors["grey-900"]};
+      font-weight: 700;
+      transition: all 0.2s;
+      &:hover {
+        background-color: ${({ theme }) => theme.colors["button-bg-hover"]};
+      }
+    }
+    
+   
+
+  }
+
+   
+
+`;
+
+export const ActionContainer = styled.div`
+
+  margin-top: 2rem;
+  p {
+    font-size: 1.5rem;
+  }
+
+  a {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.75rem;
+    color: ${({ theme }) => theme.colors["grey-900"]};
+    font-weight: 700;
+    line-height: 1.6;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    border: 0;
+    outline: 0;
+    width: 100%;
+    background-color: ${({ theme }) => theme.colors["button-bg"]};
+    transition: all 0.2s;
+    &:hover {
+      background-color: ${({ theme }) => theme.colors["button-bg-hover"]};
+    }
+    
+  }
+
+  @media (max-width: 768px) {
+ 
+    display: none;
+  }
+  
+
 `;

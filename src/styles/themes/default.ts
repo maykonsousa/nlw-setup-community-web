@@ -14,6 +14,8 @@ export const Default: DefaultTheme = {
     'discover-dark': '#3249CB',
     'discover-low': '#182049',
     'ignite-light': '#00B37E',
+    'button-bg': '#54e694',
+    'button-bg-hover': '#00da60',
     'ignite-mid': '#00875F',
     'ignite-dark': '#015F43',
     'ignite-low': '#00291D',

@@ -44,6 +44,18 @@ button {
     cursor: pointer;
 }
 
+[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+a {
+    color: ${({ theme }) => theme.colors['success-light']};
+    text-decoration: none;
+    font-weight: 700;
+    
+}
+
 
 
 

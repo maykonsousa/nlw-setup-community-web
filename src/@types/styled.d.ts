@@ -27,6 +27,8 @@ declare module 'styled-components' {
             'ec-low': string;
             'success-light': string;
             'success-base': string;
+            'button-bg': string;
+            'button-bg-hover': string;
             'success-low': string;
             'danger-light': string;
             'danger-base': string;
