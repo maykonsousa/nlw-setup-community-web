@@ -1,0 +1,52 @@
+import { FileSearch, MagnifyingGlass } from "phosphor-react";
+import React from "react";
+import { ToolTipInfo } from "../ToolTipInfo/ToolTipInfo";
+import { FormContainer } from "./FormRocketVerify.styles";
+
+interface FormRocketVerifyProps {
+  error: string | null;
+  user: string;
+  onUserVerify: () => void;
+  onChangeUser: (user: string) => void;
+  onSetError: (error: null) => void;
+}
+
+export const FormRocketVerify = ({
+  error,
+  user,
+  onUserVerify,
+  onChangeUser,
+  onSetError,
+}: FormRocketVerifyProps) => {
+  return (
+    <FormContainer
+      onSubmit={(e) => {
+        e.preventDefault();
+        onUserVerify();
+      }}
+    >
+      <div>
+        <label htmlFor="">
+          <span>Usuário NLW</span>
+          <ToolTipInfo message="Disponível no seu link de convite" />
+        </label>
+        <div>
+          <input
+            type="text"
+            placeholder="Usuário NLW"
+            value={user}
+            onChange={(e) => {
+              onChangeUser(e.target.value);
+              onSetError(null);
+            }}
+          />
+          <button type="submit">
+            <MagnifyingGlass size={32} />
+          </button>
+        </div>
+
+        {error ? <small>{error}</small> : null}
+      </div>
+    </FormContainer>
+  );
+};
