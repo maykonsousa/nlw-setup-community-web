@@ -18,6 +18,8 @@ export const FormRocketVerify = ({
   onChangeUser,
   onSetError,
 }: FormRocketVerifyProps) => {
+  const [username, setUsername] = React.useState("");
+
   return (
     <FormContainer
       onSubmit={(e) => {

@@ -13,6 +13,7 @@ import { FileSearch } from "phosphor-react";
 import { FormRocketVerify } from "../../components/FormRocketVerify";
 import { FormSignUp } from "../../components/FormSignUp";
 import Link from "next/link";
+import { GetUserByUsernameService } from "../../services/GetUserByUsername.service";
 
 const initialFormState = {
   username: "",
@@ -24,7 +25,7 @@ const initialFormState = {
 };
 
 export const SignUp = () => {
-  const [userExists, setUserExists] = useState(false);
+  const [registerAuthorized, setRegisterAuthorized] = useState(false);
   const [nlwUserName, setNlwUserName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
@@ -40,10 +41,15 @@ export const SignUp = () => {
 
     try {
       await axios.get(url);
-      setUserExists(true);
       setNlwUserName(nlwUserName);
+      const userInBase = await GetUserByUsernameService(nlwUserName);
+      if (userInBase) {
+        setError("Usuário já cadastrado. Acesse a página de login");
+        return;
+      }
+      setRegisterAuthorized(true);
     } catch {
-      setUserExists(false);
+      setRegisterAuthorized(false);
       setError("Usuário não encontrado");
     }
   };
@@ -53,7 +59,7 @@ export const SignUp = () => {
       <SignUpForm>
         <h1>Cadastrar</h1>
 
-        {userExists ? (
+        {registerAuthorized ? (
           <FormSignUp user={nlwUserName} />
         ) : (
           <FormRocketVerify

@@ -6,8 +6,8 @@ import {
   SignInContent,
   SignInForm,
 } from "./signIn.styles";
-import { ToolTipInfo } from "../../components/ToolTipInfo/ToolTipInfo";
 import Link from "next/link";
+import { FormSignIn } from "../../components/FormSignIn";
 
 export const SignIn = () => {
   return (
@@ -35,21 +35,9 @@ export const SignIn = () => {
       </SignInContent>
       <SignInForm>
         <h1>Entrar</h1>
-        <form action="">
-          <div>
-            <label htmlFor="">
-              <span>Usuário NLW</span>
-              <ToolTipInfo message="Disponível no seu link de convite" />
-            </label>
-            <input type="text" placeholder="Usuário NLW" />
-          </div>
-          <div>
-            <label htmlFor="">Senha</label>
-            <input type="password" placeholder="Senha" />
-          </div>
 
-          <button type="submit">Entrar</button>
-        </form>
+        <FormSignIn />
+
         <div>
           <p>
             Ainda não tem cadastro? <Link href="/signup">Cadastre-se</Link>

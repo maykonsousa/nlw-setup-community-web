@@ -108,63 +108,6 @@ export const SignInForm = styled.div`
     font-weight: 700;
     font-size: 3.5rem;
   }
-  form {
-    margin-top: 2rem;
-    width: 30rem;
-    display: flex;
-    flex-direction: column;
-    align-items: start;
-    gap: 1rem;
-
-    div {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-      gap: 0.5rem;
-      label {
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-size: 0.8rem;
-        font-weight: 700;
-        span {
-          display: inline;
-          white-space: nowrap;
-        }
-        color: ${({ theme }) => theme.colors["grey-100"]};
-      }
-
-      input {
-        width: 100%;
-        height: 3rem;
-        border: 0;
-        outline: 0;
-        border-radius: 8px;
-        padding: 0 1rem;
-        background-color: ${({ theme }) => theme.colors["shape-primary"]};
-        font-size: 1.5rem;
-        color: ${({ theme }) => theme.colors["text-base"]};
-      }
-    }
-
-    button {
-      width: 100%;
-      height: 3rem;
-      border: 0;
-      outline: 0;
-      border-radius: 8px;
-      padding: 0 1rem;
-      background-color: ${({ theme }) => theme.colors["button-bg"]};
-      font-size: 1.5rem;
-      color: ${({ theme }) => theme.colors["grey-900"]};
-      font-weight: 700;
-      transition: all 0.2s;
-      &:hover {
-        background-color: ${({ theme }) => theme.colors["button-bg-hover"]};
-      }
-    }
-  }
 `;
 
 export const ActionContainer = styled.div`

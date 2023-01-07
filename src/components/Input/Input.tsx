@@ -1,9 +1,11 @@
 import React from "react";
+import { ToolTipInfo } from "../ToolTipInfo/ToolTipInfo";
 import { InputContainer } from "./Input.styles";
 
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
   error: string | null;
+  information?: string;
   placeholder: string;
 }
 
@@ -17,6 +19,7 @@ export const Input = ({
   error,
   placeholder,
   value,
+  information,
   ...props
 }: InputProps) => {
   const validClassName = ({ error, value }: classNameProps) => {
@@ -28,9 +31,15 @@ export const Input = ({
     }
     return "";
   };
+
   return (
     <InputContainer>
-      {label ? <label htmlFor={props.name}>{label}</label> : null}
+      {label ? (
+        <label htmlFor={props.name}>
+          <span>{label}</span>
+          {information ? <ToolTipInfo message={information} /> : null}
+        </label>
+      ) : null}
       <input
         className={validClassName({ error, value })}
         type="text"
