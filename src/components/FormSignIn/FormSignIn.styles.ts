@@ -24,4 +24,12 @@ export const FormContainer = styled.form`
       background-color: ${({ theme }) => theme.colors["button-bg-hover"]};
     }
   }
+
+  small {
+    color: ${({ theme }) => theme.colors["danger-base"]};
+    font-size: 1.2rem;
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
 `;

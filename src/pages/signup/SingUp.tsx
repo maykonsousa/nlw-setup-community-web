@@ -29,9 +29,6 @@ export const SignUp = () => {
   const [nlwUserName, setNlwUserName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  console.log("username", nlwUserName);
-  console.log("error", error);
-
   const userExistsVerify = async () => {
     const url = `https://skylab-api.rocketseat.com.br/public/event/nlw-setup/referral/${nlwUserName}`;
     if (!nlwUserName) {

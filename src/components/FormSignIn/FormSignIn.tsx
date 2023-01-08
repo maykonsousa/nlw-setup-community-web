@@ -1,4 +1,6 @@
-import React, { useContext } from "react";
+import Router from "next/router";
+import { parseCookies } from "nookies";
+import React, { useContext, useEffect } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { Input } from "../Input";
 import { FormContainer } from "./FormSignIn.styles";
@@ -6,14 +8,23 @@ import { FormContainer } from "./FormSignIn.styles";
 export const FormSignIn = () => {
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
-  const { onLogin } = useContext(UserContext);
+  const { onLogin, token } = useContext(UserContext);
+  const cookieToken = parseCookies().token;
+
+  useEffect(() => {
+    if (cookieToken || token) {
+      Router.push("/ranking");
+    }
+  }, [token, cookieToken]);
 
   return (
     <FormContainer
-      onSubmit={(e) => {
+      onSubmit={async (e) => {
         e.preventDefault();
-        onLogin({ username, password });
+        const { error } = await onLogin({ username, password });
+        setErrorMessage(error);
       }}
     >
       <Input
@@ -35,6 +46,7 @@ export const FormSignIn = () => {
       />
 
       <button type="submit">Entrar</button>
+      {errorMessage && <small>{errorMessage}</small>}
     </FormContainer>
   );
 };

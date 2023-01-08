@@ -1,27 +1,28 @@
-import { error } from "console";
+import Router from "next/router";
 import { Trash } from "phosphor-react";
 import React, { useEffect, useState } from "react";
+import { CreateUser } from "../../services/PostUser.service";
 import { Input } from "../Input";
 import { ButtonsContainer, FormSignUpContainer } from "./FormSignUp.styles";
 
 interface Ivalues {
-  username: string;
-  fullName: string;
-  githubProfile: string;
-  linkedinProfile: string;
-  rocketseatProfile: string;
-  password: string;
-  passwordConfirmation: string;
+  username: string | null;
+  fullName: string | null;
+  githubProfile: string | null;
+  linkedinProfile: string | null;
+  rocketseatProfile: string | null;
+  password: string | null;
+  passwordConfirmation: string | null;
 }
 
 const initialErrors = {
-  username: "",
-  fullName: "",
-  githubProfile: "",
-  linkedinProfile: "",
-  rocketseatProfile: "",
-  password: "",
-  passwordConfirmation: "",
+  username: null,
+  fullName: null,
+  githubProfile: null,
+  linkedinProfile: null,
+  rocketseatProfile: null,
+  password: null,
+  passwordConfirmation: null,
 };
 
 interface FormSignUpProps {
@@ -41,8 +42,8 @@ export const FormSignUp = ({ user }: FormSignUpProps) => {
   const [errors, setErrors] = useState<Ivalues>(initialErrors);
   const [formState, setFormState] = useState(initialFormState);
 
-  const validadteValues = (values: Ivalues): void => {
-    const newErrors = { ...initialErrors };
+  const validadteValues = (values: Ivalues): boolean => {
+    const newErrors: Ivalues = { ...initialErrors };
     if (!values.fullName) {
       newErrors.fullName = "Nome e Sobrenome obrigatório";
     }
@@ -77,6 +78,9 @@ export const FormSignUp = ({ user }: FormSignUpProps) => {
       newErrors.passwordConfirmation = "Senhas não conferem";
     }
     setErrors({ ...newErrors });
+    const hasError = !!Object.values(newErrors).find((error) => error);
+
+    return hasError;
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -87,10 +91,23 @@ export const FormSignUp = ({ user }: FormSignUpProps) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    validadteValues(formState);
+    const hasError = validadteValues(formState);
 
-    console.log("errors", errors);
-    console.log("formState", formState);
+    if (hasError) {
+      return;
+    }
+
+    await CreateUser({
+      username: formState.username,
+      fullName: formState.fullName,
+      githubProfile: formState.githubProfile,
+      linkedinProfile: formState.linkedinProfile,
+      rocketseatProfile: formState.rocketseatProfile,
+      password: formState.password,
+    });
+
+    //redirect to login
+    Router.push("/");
   };
 
   const handleClean = () => {

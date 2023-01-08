@@ -16,6 +16,8 @@ export interface IAuthServiceResponse {
     githubProfile: string;
     linkedinProfile: string;
     rocketseatProfile: string;
+    avatarUrl: string;
+    bio: string;
     updatedAt: Date;
   };
 }
@@ -29,8 +31,14 @@ export const AuthService = async ({
       username,
       password,
     });
-    return data;
-  } catch (error) {
-    console.log(error);
+    return {
+      data,
+      error: null,
+    };
+  } catch (err) {
+    return {
+      data: null,
+      error: "Falha no login. Verifique suas credenciais e tente novamente.",
+    };
   }
 };
