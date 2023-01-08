@@ -6,14 +6,13 @@ import Router from "next/router";
 import { parseCookies } from "nookies";
 
 export const Ranking = () => {
-  const { token } = useContext(UserContext);
   const cookieToken = parseCookies().token;
 
   useEffect(() => {
-    if (!token || !cookieToken) {
+    if (!cookieToken) {
       Router.push("/");
     }
-  }, [token, cookieToken]);
+  }, [cookieToken]);
   return (
     <RankingContainer>
       <Header />

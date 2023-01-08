@@ -8,8 +8,19 @@ import {
 } from "./signIn.styles";
 import Link from "next/link";
 import { FormSignIn } from "../../components/FormSignIn";
+import { parseCookies } from "nookies";
+import Router from "next/router";
+import { useEffect } from "react";
 
 export const SignIn = () => {
+  const cookieToken = parseCookies().token;
+
+  useEffect(() => {
+    if (cookieToken) {
+      Router.push("/ranking");
+    }
+  }, [cookieToken]);
+
   return (
     <SignInContainer>
       <SignInContent>

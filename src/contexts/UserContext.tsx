@@ -5,6 +5,11 @@ import { GetUserByTokenService } from "../services/GetUserByToken.service";
 import { setCookie, parseCookies, destroyCookie } from "nookies";
 import Router from "next/router";
 import { DeleteAccountService } from "../services/DeletAccount.service";
+import {
+  EditProfileService,
+  IDataUpdateProps,
+} from "../services/EditProfile.service";
+import { GetAllUsersService } from "../services/GetAllUsers.service";
 
 interface IUser {
   id: string;
@@ -35,8 +40,9 @@ interface UserContextData {
   onLogin: (props: IAuthServiceProps) => Promise<ILoginData>;
   onDeleteAccount: () => Promise<void>;
   onLogoutAccount: () => void;
-  setToken: React.Dispatch<React.SetStateAction<string | null>>;
-  token: string | null;
+  onEditAccount: (data: IDataUpdateProps) => Promise<string | null>;
+  showEditModal: boolean;
+  setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser;
 }
 
@@ -44,7 +50,12 @@ export const UserContext = createContext({} as UserContextData);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<IUser>({} as IUser);
-  const [token, setToken] = useState<string | null>(null);
+  const [users, setUsers] = useState<IUser[]>([]);
+  const [showEditModal, setShowEditModal] = useState(false);
+
+  const cookieToken = parseCookies().token;
+
+  console.log(user);
 
   const onLogin = async ({
     username,
@@ -56,7 +67,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: "/",
       });
-      setToken(data.token);
 
       Router.push("/ranking");
     }
@@ -64,34 +74,53 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const GetUserLoguedData = async () => {
-    const response = await GetUserByTokenService(`${token}`);
+    const response = await GetUserByTokenService(`${cookieToken}`);
     setUser(response);
   };
 
+  const GetAllUsers = async () => {
+    const { data, error } = await GetAllUsersService(`${cookieToken}`);
+    setUsers(data);
+    return error;
+  };
+
   const onDeleteAccount = async (): Promise<void> => {
-    await DeleteAccountService(`${token}`);
+    await DeleteAccountService(`${cookieToken}`);
 
     setCookie(null, "token", "");
-    setToken(null);
+    Router.push("/");
 
     setUser({} as IUser);
   };
 
   const onLogoutAccount = (): void => {
     setCookie(null, "token", "");
-    setToken(null);
     Router.push("/");
   };
 
-  useEffect(() => {
-    if (token) {
-      GetUserLoguedData();
-      setCookie(null, "token", token, {
-        maxAge: 60 * 60 * 24,
-        path: "/",
-      });
+  const onEditAccount = async (
+    dataUpdated: IDataUpdateProps
+  ): Promise<string | null> => {
+    if (cookieToken) {
+      const { data, error } = await EditProfileService(
+        cookieToken,
+        dataUpdated
+      );
+
+      if (data) {
+        setUser(data);
+      }
+      return error;
     }
-  }, [token]);
+    return "Falha ao editar perfil. Saia da aplicação e tente novamente.";
+  };
+
+  useEffect(() => {
+    if (cookieToken) {
+      GetUserLoguedData();
+      GetAllUsers();
+    }
+  }, [cookieToken]);
 
   return (
     <UserContext.Provider
@@ -99,9 +128,10 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         onLogin,
         onDeleteAccount,
         onLogoutAccount,
-        token,
-        setToken,
+        setShowEditModal,
+        onEditAccount,
         user,
+        showEditModal,
       }}
     >
       {children}

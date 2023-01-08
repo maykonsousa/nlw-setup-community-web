@@ -31,6 +31,7 @@ export const AuthService = async ({
       username,
       password,
     });
+
     return {
       data,
       error: null,

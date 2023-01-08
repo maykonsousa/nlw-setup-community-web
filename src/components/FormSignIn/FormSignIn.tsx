@@ -10,14 +10,7 @@ export const FormSignIn = () => {
   const [password, setPassword] = React.useState("");
   const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
 
-  const { onLogin, token } = useContext(UserContext);
-  const cookieToken = parseCookies().token;
-
-  useEffect(() => {
-    if (cookieToken || token) {
-      Router.push("/ranking");
-    }
-  }, [token, cookieToken]);
+  const { onLogin } = useContext(UserContext);
 
   return (
     <FormContainer

@@ -15,15 +15,6 @@ import { FormSignUp } from "../../components/FormSignUp";
 import Link from "next/link";
 import { GetUserByUsernameService } from "../../services/GetUserByUsername.service";
 
-const initialFormState = {
-  username: "",
-  password: "",
-  passwordConfirmation: "",
-  email: "",
-  name: "",
-  lastName: "",
-};
-
 export const SignUp = () => {
   const [registerAuthorized, setRegisterAuthorized] = useState(false);
   const [nlwUserName, setNlwUserName] = useState<string>("");

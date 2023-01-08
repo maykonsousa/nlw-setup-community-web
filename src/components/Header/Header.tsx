@@ -1,11 +1,10 @@
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   ActionConfirmationContainer,
   HeaderContainer,
   HeaderContent,
   NavigattionContainer,
-  ProfileButton,
   ProfileContainer,
   ProfileFooter,
   ProfileHeader,
@@ -19,6 +18,9 @@ import { Pencil, Power, Trash } from "phosphor-react";
 import IgniteIcon from "../../assets/ignite.svg";
 import GitHubIcon from "../../assets/github.svg";
 import LinkedinIcon from "../../assets/linkedin.svg";
+import GeneralAvatar from "../../assets/developer-icon.webp";
+import { EditProfleModal } from "../EditProfileModal";
+import { Button } from "../Button";
 
 interface IConfimationProps {
   message: string;
@@ -36,12 +38,12 @@ const ActionConfirmation = ({
     <ActionConfirmationContainer>
       <h3>{message}</h3>
       <div>
-        <ProfileButton color="secondary" onClick={onConfirm}>
+        <Button color="secondary" onClick={onConfirm}>
           Sim
-        </ProfileButton>
-        <ProfileButton color="danger" onClick={onSetShow}>
+        </Button>
+        <Button color="danger" onClick={onSetShow}>
           Não
-        </ProfileButton>
+        </Button>
       </div>
     </ActionConfirmationContainer>
   );
@@ -52,14 +54,15 @@ export const Header = () => {
   const [confirmAction, setConfirAction] = useState(false);
   const [message, setMessage] = useState("");
 
-  const { user, onDeleteAccount, onLogoutAccount } =
-    React.useContext(UserContext);
+  const { user, onDeleteAccount, onLogoutAccount, setShowEditModal } =
+    useContext(UserContext);
 
   const GET_OUT_MESSAGE = "Tem certeza que deseja sair?";
   const DELETE_ACCOUNT_MESSAGE = "Tem certeza que deseja deletar sua conta?";
 
   return (
     <HeaderContainer>
+      <EditProfleModal />
       <HeaderContent>
         <Image src={BrandLogo} alt={"Logo NLW"} />
         <NavigattionContainer>
@@ -76,12 +79,21 @@ export const Header = () => {
           </ul>
         </NavigattionContainer>
         <ProfileImageContainer onClick={() => setShowProfile(!showProfile)}>
-          <Image
-            src={user.avatarUrl}
-            width={120}
-            height={120}
-            alt={"Foto de perfil"}
-          />
+          {user?.avatarUrl ? (
+            <Image
+              src={user.avatarUrl}
+              width={120}
+              height={120}
+              alt={"Foto de perfil"}
+            />
+          ) : (
+            <Image
+              src={GeneralAvatar.src}
+              width={120}
+              height={120}
+              alt={"Foto de perfil"}
+            />
+          )}
         </ProfileImageContainer>
 
         {showProfile && (
@@ -145,10 +157,13 @@ export const Header = () => {
               />
             ) : (
               <ProfileFooter>
-                <ProfileButton color="secondary">
+                <Button
+                  color="secondary"
+                  onClick={() => setShowEditModal(true)}
+                >
                   <Pencil size={24} />
-                </ProfileButton>
-                <ProfileButton
+                </Button>
+                <Button
                   color="danger"
                   onClick={() => {
                     setConfirAction(true);
@@ -156,8 +171,8 @@ export const Header = () => {
                   }}
                 >
                   <Trash size={24} />
-                </ProfileButton>
-                <ProfileButton
+                </Button>
+                <Button
                   color="warning"
                   onClick={() => {
                     setConfirAction(true);
@@ -165,7 +180,7 @@ export const Header = () => {
                   }}
                 >
                   <Power size={24} />
-                </ProfileButton>
+                </Button>
               </ProfileFooter>
             )}
           </ProfileContainer>
