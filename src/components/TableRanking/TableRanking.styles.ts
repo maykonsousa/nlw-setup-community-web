@@ -31,6 +31,7 @@ export const TableContainer = styled.div`
   }
   p {
     margin-top: 2rem;
+    margin-left: 2rem;
   }
   table {
     width: 100%;

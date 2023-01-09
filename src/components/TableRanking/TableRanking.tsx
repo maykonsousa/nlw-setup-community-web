@@ -23,7 +23,7 @@ export function TableRanking() {
 
   return (
     <TableContainer>
-      <p>{`Ultima atualização: ${users?.[0]?.updatedAt}`}</p>
+      {users ? <p>{`Última atualização: ${users?.[0]?.updatedAt}`}</p> : null}
       {usersSorted?.length ? (
         <table>
           <thead>
