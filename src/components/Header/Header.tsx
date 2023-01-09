@@ -190,7 +190,10 @@ export const Header = () => {
               <ProfileFooter>
                 <Button
                   color="secondary"
-                  onClick={() => setShowEditModal(true)}
+                  onClick={() => {
+                    setShowEditModal(true);
+                    setShowProfile(false);
+                  }}
                 >
                   <Pencil size={24} />
                 </Button>
