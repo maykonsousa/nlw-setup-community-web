@@ -29,6 +29,9 @@ export const TableContainer = styled.div`
     font-size: 3rem;
     text-align: center;
   }
+  p {
+    margin-top: 2rem;
+  }
   table {
     width: 100%;
     border-spacing: 0 0.5rem;

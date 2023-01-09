@@ -8,6 +8,7 @@ export function TableRanking() {
   const { users } = useContext(UserContext);
   return (
     <TableContainer>
+      <p>{`Ultima atualização: ${users?.[0].updatedAt}`}</p>
       {users?.length ? (
         <table>
           <thead>
