@@ -1,21 +1,19 @@
-import VerticalLogo from "../../assets/logoVertical.svg";
+import VerticalLogo from "../assets/logoVertical.svg";
 import Image from "next/image";
 import {
   ActionContainer,
   SignUpContainer,
   SignUpContent,
   SignUpForm,
-} from "./signUp.styles";
-import { ToolTipInfo } from "../../components/ToolTipInfo/ToolTipInfo";
+} from "../styles/pages/signUp.styles";
 import { useState } from "react";
 import axios from "axios";
-import { FileSearch } from "phosphor-react";
-import { FormRocketVerify } from "../../components/FormRocketVerify";
-import { FormSignUp } from "../../components/FormSignUp";
+import { FormRocketVerify } from "../components/FormRocketVerify";
+import { FormSignUp } from "../components/FormSignUp";
 import Link from "next/link";
-import { GetUserByUsernameService } from "../../services/GetUserByUsername.service";
+import { GetUserByUsernameService } from "../services/GetUserByUsername.service";
 
-export const SignUp = () => {
+const SignUp = () => {
   const [registerAuthorized, setRegisterAuthorized] = useState(false);
   const [nlwUserName, setNlwUserName] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
@@ -88,3 +86,5 @@ export const SignUp = () => {
     </SignUpContainer>
   );
 };
+
+export default SignUp;

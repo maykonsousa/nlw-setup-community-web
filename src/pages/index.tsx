@@ -1,3 +1,2 @@
-import { SignIn as Index } from './signin'
-
+import Index from "./singIn";
 export default Index;

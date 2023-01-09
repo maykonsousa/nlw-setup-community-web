@@ -1,18 +1,18 @@
-import VerticalLogo from "../../assets/logoVertical.svg";
+import VerticalLogo from "../assets/logoVertical.svg";
 import Image from "next/image";
 import {
   ActionContainer,
   SignInContainer,
   SignInContent,
   SignInForm,
-} from "./signIn.styles";
+} from "../styles/pages/signIn.styles";
 import Link from "next/link";
-import { FormSignIn } from "../../components/FormSignIn";
+import { FormSignIn } from "../components/FormSignIn";
 import { parseCookies } from "nookies";
 import Router from "next/router";
 import { useEffect } from "react";
 
-export const SignIn = () => {
+const SignIn = () => {
   const cookieToken = parseCookies().token;
 
   useEffect(() => {
@@ -61,3 +61,5 @@ export const SignIn = () => {
     </SignInContainer>
   );
 };
+
+export default SignIn;

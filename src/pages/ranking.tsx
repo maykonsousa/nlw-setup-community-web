@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
-import { Header } from "../../components/Header";
-import { RankingContainer } from "./Ranking.styles";
+import { Header } from "../components/Header";
+import { RankingContainer } from "../styles/pages/Ranking.styles";
 import Router from "next/router";
 import { parseCookies } from "nookies";
-import { TableRanking } from "../../components/TableRanking/TableRanking";
+import { TableRanking } from "../components/TableRanking/TableRanking";
 
 export const Ranking = () => {
   const cookieToken = parseCookies().token;
@@ -21,3 +21,5 @@ export const Ranking = () => {
     </RankingContainer>
   );
 };
+
+export default Ranking;
