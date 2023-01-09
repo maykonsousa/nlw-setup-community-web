@@ -28,7 +28,6 @@ interface IUser {
 
 interface UserProviderProps {
   children: React.ReactNode;
-  token: string;
 }
 
 interface ILoginData {
@@ -51,12 +50,10 @@ interface UserContextData {
 
 export const UserContext = createContext({} as UserContextData);
 
-export const UserProvider = ({ children, token }: UserProviderProps) => {
+export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [users, setUsers] = useState<IUser[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
-
-  console.log("token", token);
 
   const cookieToken = parseCookies().token;
 
@@ -141,24 +138,4 @@ export const UserProvider = ({ children, token }: UserProviderProps) => {
       {children}
     </UserContext.Provider>
   );
-};
-
-//get static props
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  const { token } = parseCookies(ctx);
-
-  if (!token) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
-
-  return {
-    props: {
-      token,
-    },
-  };
 };
