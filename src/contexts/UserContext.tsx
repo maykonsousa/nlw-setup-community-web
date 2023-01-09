@@ -22,7 +22,7 @@ export interface IUser {
   avatarUrl: string;
   bio: string;
   countIndication: number;
-  updatedAt: Date;
+  updatedAt: string;
 }
 
 interface UserProviderProps {
