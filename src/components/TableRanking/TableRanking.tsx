@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
+import { format } from "date-fns";
 import Link from "next/link";
 import { MagnifyingGlass } from "phosphor-react";
 import { useContext } from "react";
@@ -21,9 +22,24 @@ export function TableRanking() {
 
   const { onViewTickeModal } = useContext(UserContext);
 
+  const date = users[0]?.updatedAt;
+
+  //fromat date to pt-BR format like 01/01/2021 00:00:00 with date-fns
+  const formatDate = (date: string) => {
+    if (!date) return null;
+    const dateFormated = new Date(date);
+    //remove 3 hours to date
+    dateFormated.setHours(dateFormated.getHours() - 3);
+    return format(dateFormated, "dd/MM/yyyy HH:mm:ss");
+  };
+
+  const dateUpdatedFormated = formatDate(date);
+
   return (
     <TableContainer>
-      {users ? <p>{`Última atualização: ${users?.[0]?.updatedAt}`}</p> : null}
+      {dateUpdatedFormated ? (
+        <p>{`Última atualização: ${dateUpdatedFormated}`}</p>
+      ) : null}
       {usersSorted?.length ? (
         <table>
           <thead>
