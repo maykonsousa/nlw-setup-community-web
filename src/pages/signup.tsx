@@ -4,6 +4,7 @@ import {
   ActionContainer,
   SignUpContainer,
   SignUpContent,
+  SignUpContentMobile,
   SignUpForm,
 } from "../styles/pages/signUp.styles";
 import { useState } from "react";
@@ -61,6 +62,24 @@ const SignUp = () => {
             Já tem cadastro? <Link href="/">Fazer Login</Link>
           </p>
         </div>
+
+        <SignUpContentMobile>
+          <p>
+            Plataforma independente para reunir a galera que tá participando do{" "}
+            <span>NLW SETUP</span>
+          </p>
+
+          <p>
+            Para se cadastrar{" "}
+            <a
+              href={"https://nlw.rocketseat.com.br/convite/maykon-236"}
+              target="_blank"
+              rel="noreferrer"
+            >
+              clique aqui
+            </a>
+          </p>
+        </SignUpContentMobile>
       </SignUpForm>
       <SignUpContent>
         <Image src={VerticalLogo} alt="logo" />

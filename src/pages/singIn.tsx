@@ -4,6 +4,7 @@ import {
   ActionContainer,
   SignInContainer,
   SignInContent,
+  SignInContentMobile,
   SignInForm,
 } from "../styles/pages/signIn.styles";
 import Link from "next/link";
@@ -58,6 +59,24 @@ const SignIn = () => {
           </p>
         </div>
       </SignInForm>
+
+      <SignInContentMobile>
+        <p>
+          Plataforma independente para reunir a galera que tá participando do{" "}
+          <span>NLW SETUP</span>
+        </p>
+
+        <p>
+          Para se cadastrar{" "}
+          <a
+            href={"https://nlw.rocketseat.com.br/convite/maykon-236"}
+            target="_blank"
+            rel="noreferrer"
+          >
+            clique aqui
+          </a>
+        </p>
+      </SignInContentMobile>
     </SignInContainer>
   );
 };

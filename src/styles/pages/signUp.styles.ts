@@ -138,3 +138,51 @@ export const ActionContainer = styled.div`
     display: none;
   }
 `;
+
+export const SignUpContentMobile = styled.div`
+  // show only on mobile
+  display: none;
+  @media (max-width: 768px) {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    span {
+      display: block;
+      position: relative;
+
+      &:before {
+        content: attr(data-text);
+        position: absolute;
+        text-shadow: 2px 2px 1px ${({ theme }) => theme.colors["danger-light"]},
+          -1px -1px 1px ${({ theme }) => theme.colors["danger-low"]},
+          -2px 2px 1px ${({ theme }) => theme.colors["danger-light"]},
+          1px -1px 1px ${({ theme }) => theme.colors["danger-low"]};
+        z-index: 1;
+      }
+
+      &:nth-child(1) {
+        padding-right: 2.25rem;
+      }
+
+      &:nth-child(2) {
+        padding-left: 2.25rem;
+      }
+    }
+  }
+
+  > p {
+    font-size: 1.5rem;
+    text-align: center;
+    color: ${({ theme }) => theme.colors["text-base"]};
+    span {
+      background-image: linear-gradient(90deg, #857bf8, #54e694);
+      background-clip: border-box;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+  }
+`;
