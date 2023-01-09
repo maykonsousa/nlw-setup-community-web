@@ -58,6 +58,9 @@ export const TableContainer = styled.div`
 
         border-left: solid 1px ${({ theme }) => theme.colors["grey-500"]};
         a {
+          align-items: center;
+          display: flex;
+          gap: 1rem;
           transition: filter 0.2s;
           &:hover {
             color: ${({ theme }) => theme.colors["text-base"]};

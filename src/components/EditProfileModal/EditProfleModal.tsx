@@ -1,6 +1,5 @@
 import { X } from "phosphor-react";
 import React, { useContext, useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
 import ReactModal from "react-modal";
 import { UserContext } from "../../contexts/UserContext";
 import { Default } from "../../styles/themes/default";

@@ -1,5 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
+import Link from "next/link";
+import { MagnifyingGlass } from "phosphor-react";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/UserContext";
 import { TableContainer } from "./TableRanking.styles";
@@ -7,7 +9,6 @@ import { TableContainer } from "./TableRanking.styles";
 export function TableRanking() {
   const { users } = useContext(UserContext);
 
-  //sort users by countIndication
   const usersSorted = users?.sort((a, b) => {
     if (a.countIndication > b.countIndication) {
       return -1;
@@ -17,6 +18,8 @@ export function TableRanking() {
     }
     return 0;
   });
+
+  const { onViewTickeModal } = useContext(UserContext);
 
   return (
     <TableContainer>
@@ -38,7 +41,12 @@ export function TableRanking() {
                 <td>{user.username}</td>
                 <td>{user.countIndication}</td>
                 <td>
-                  <a href="#">teste</a>
+                  <Link
+                    href="#"
+                    onClick={() => onViewTickeModal(user.username)}
+                  >
+                    <MagnifyingGlass size={24} /> ver detalhes
+                  </Link>
                 </td>
               </tr>
             ))}

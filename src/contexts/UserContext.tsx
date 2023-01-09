@@ -2,7 +2,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import { AuthService, IAuthServiceProps } from "../services/Auth.service";
 import { GetUserByTokenService } from "../services/GetUserByToken.service";
-import { setCookie, parseCookies, destroyCookie } from "nookies";
+import { setCookie, parseCookies } from "nookies";
 import Router from "next/router";
 import { DeleteAccountService } from "../services/DeletAccount.service";
 import {
@@ -10,9 +10,8 @@ import {
   IDataUpdateProps,
 } from "../services/EditProfile.service";
 import { GetAllUsersService } from "../services/GetAllUsers.service";
-import { GetServerSideProps } from "next";
 
-interface IUser {
+export interface IUser {
   id: string;
   username: string;
   fullName: string;
@@ -42,10 +41,17 @@ interface UserContextData {
   onDeleteAccount: () => Promise<void>;
   onLogoutAccount: () => void;
   onEditAccount: (data: IDataUpdateProps) => Promise<string | null>;
+  onViewTickeModal: (username: string) => void;
   showEditModal: boolean;
   setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser;
   users: IUser[];
+  usernameSelected: string | null;
+  setUserNameSelected: React.Dispatch<React.SetStateAction<string | null>>;
+  showTicketModal: boolean;
+  setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+  viewUser: IUser;
+  setViewUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 export const UserContext = createContext({} as UserContextData);
@@ -54,6 +60,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [users, setUsers] = useState<IUser[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [usernameSelected, setUserNameSelected] = useState<string | null>(null);
+  const [showTicketModal, setShowTicketModal] = useState(false);
+  const [viewUser, setViewUser] = useState<IUser>({} as IUser);
 
   const cookieToken = parseCookies().token;
 
@@ -115,6 +124,13 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     return "Falha ao editar perfil. Saia da aplicação e tente novamente.";
   };
 
+  const onViewTickeModal = (username: string): void => {
+    const user = users.find((user) => user.username === username) as IUser;
+    setViewUser(user);
+    setUserNameSelected(username);
+    setShowTicketModal(true);
+  };
+
   useEffect(() => {
     if (cookieToken) {
       GetUserLoguedData();
@@ -130,9 +146,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         onLogoutAccount,
         setShowEditModal,
         onEditAccount,
+        onViewTickeModal,
+        setShowTicketModal,
+        usernameSelected,
+        setUserNameSelected,
+        showTicketModal,
         user,
         showEditModal,
         users,
+        viewUser,
+        setViewUser,
       }}
     >
       {children}

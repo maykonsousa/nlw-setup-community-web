@@ -1,0 +1,1 @@
+export { ViewTiketModal } from "./ViewTiketModal";
