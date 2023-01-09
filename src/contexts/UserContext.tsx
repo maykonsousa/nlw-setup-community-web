@@ -10,6 +10,7 @@ import {
   IDataUpdateProps,
 } from "../services/EditProfile.service";
 import { GetAllUsersService } from "../services/GetAllUsers.service";
+import { GetServerSideProps } from "next";
 
 interface IUser {
   id: string;
@@ -27,6 +28,7 @@ interface IUser {
 
 interface UserProviderProps {
   children: React.ReactNode;
+  token: string;
 }
 
 interface ILoginData {
@@ -44,18 +46,19 @@ interface UserContextData {
   showEditModal: boolean;
   setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
   user: IUser;
+  users: IUser[];
 }
 
 export const UserContext = createContext({} as UserContextData);
 
-export const UserProvider = ({ children }: UserProviderProps) => {
+export const UserProvider = ({ children, token }: UserProviderProps) => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [users, setUsers] = useState<IUser[]>([]);
   const [showEditModal, setShowEditModal] = useState(false);
 
-  const cookieToken = parseCookies().token;
+  console.log("token", token);
 
-  console.log(user);
+  const cookieToken = parseCookies().token;
 
   const onLogin = async ({
     username,
@@ -132,9 +135,30 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         onEditAccount,
         user,
         showEditModal,
+        users,
       }}
     >
       {children}
     </UserContext.Provider>
   );
+};
+
+//get static props
+export const getServerSideProps: GetServerSideProps = async (ctx) => {
+  const { token } = parseCookies(ctx);
+
+  if (!token) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      token,
+    },
+  };
 };

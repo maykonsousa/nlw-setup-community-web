@@ -12,7 +12,6 @@ export const EditProfileService = async (
   token: string,
   data: IDataUpdateProps
 ) => {
-  console.log(token, data);
   try {
     const response = await Api.put("/user", data, {
       headers: {

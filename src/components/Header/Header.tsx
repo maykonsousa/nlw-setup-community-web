@@ -4,17 +4,20 @@ import {
   ActionConfirmationContainer,
   HeaderContainer,
   HeaderContent,
+  IconMenuMobileContainer,
+  MenuMobileContainer,
   NavigattionContainer,
   ProfileContainer,
   ProfileFooter,
   ProfileHeader,
   ProfileImageContainer,
   SocialContainer,
+  BrandContainer,
 } from "./header.styles";
 import BrandLogo from "../../assets/brand.svg";
 import Link from "next/link";
 import { UserContext } from "../../contexts/UserContext";
-import { Pencil, Power, Trash } from "phosphor-react";
+import { List, Pencil, Power, Trash, X } from "phosphor-react";
 import IgniteIcon from "../../assets/ignite.svg";
 import GitHubIcon from "../../assets/github.svg";
 import LinkedinIcon from "../../assets/linkedin.svg";
@@ -51,6 +54,7 @@ const ActionConfirmation = ({
 
 export const Header = () => {
   const [showProfile, setShowProfile] = useState(false);
+  const [showMenuMobile, setShowMenuMobile] = useState(false);
   const [confirmAction, setConfirAction] = useState(false);
   const [message, setMessage] = useState("");
 
@@ -64,7 +68,34 @@ export const Header = () => {
     <HeaderContainer>
       <EditProfleModal />
       <HeaderContent>
-        <Image src={BrandLogo} alt={"Logo NLW"} />
+        <IconMenuMobileContainer
+          onClick={() => setShowMenuMobile(!showMenuMobile)}
+        >
+          <List size={32} />
+        </IconMenuMobileContainer>
+        {showMenuMobile && (
+          <MenuMobileContainer>
+            <div>
+              <h1>Menu</h1>
+              <X size={24} onClick={() => setShowMenuMobile(false)} />
+            </div>
+            <ul>
+              <li>
+                <Link href={"/ranking"}>Ranking</Link>
+              </li>
+              <li>
+                <Link href={"/community"}>Community</Link>
+              </li>
+              <li>
+                <Link href={"/about"}>Sobre o Autor</Link>
+              </li>
+            </ul>
+          </MenuMobileContainer>
+        )}
+        <BrandContainer>
+          <Image src={BrandLogo} alt={"Logo NLW"} />
+          <h1>COMMUNITY</h1>
+        </BrandContainer>
         <NavigattionContainer>
           <ul>
             <li>
@@ -74,7 +105,7 @@ export const Header = () => {
               <Link href={"/community"}>Community</Link>
             </li>
             <li>
-              <Link href={"/ranking"}>Sobre o Autor</Link>
+              <Link href={"/about"}>Sobre o Autor</Link>
             </li>
           </ul>
         </NavigattionContainer>
@@ -95,12 +126,12 @@ export const Header = () => {
             />
           )}
         </ProfileImageContainer>
-
         {showProfile && (
           <ProfileContainer>
             <ProfileHeader>
               <h2>{user?.fullName}</h2>
               <p>{user?.bio}</p>
+              <X size={24} onClick={() => setShowProfile(false)} />
             </ProfileHeader>
 
             <SocialContainer>

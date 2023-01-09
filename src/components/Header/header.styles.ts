@@ -20,9 +20,98 @@ export const HeaderContent = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding: 0 1rem;
+`;
+
+export const IconMenuMobileContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media (min-width: 769px) {
+    display: none;
+  }
+`;
+
+export const MenuMobileContainer = styled.div`
+  position: absolute;
+  top: 6rem;
+  left: 1rem;
+  width: 15rem;
+  padding: 1.5rem 1rem;
+  background-color: ${({ theme }) => theme.colors["grey-600"]};
+  border-radius: 8px;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    h1 {
+      font-size: 1.5rem;
+    }
+  }
+  ul {
+    height: 100%;
+    gap: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      font-size: 1.5rem;
+      display: flex;
+      text-align: start;
+      a {
+        transition: all 0.2s;
+        &:hover {
+          color: ${({ theme }) => theme.colors["text-base"]};
+        }
+      }
+    }
+  }
+`;
+
+export const BrandContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h1 {
+    margin-top: -5px;
+    color: ${({ theme }) => theme.colors["text-title"]};
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: clamp(1rem, 1.5vw, 2rem);
+    line-height: 0.75em;
+    text-align: center;
+    text-shadow: 1px 1px 1px ${({ theme }) => theme.colors["rocketseat-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["ignite-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["rocketseat-light"]},
+      1px 1px 1px ${({ theme }) => theme.colors["ignite-light"]},
+      2px 1px 1px ${({ theme }) => theme.colors["rocketseat-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["ignite-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["rocketseat-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["ignite-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["rocketseat-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["ignite-light"]},
+      3px 2px 1px ${({ theme }) => theme.colors["rocketseat-light"]},
+      2px 2px 1px ${({ theme }) => theme.colors["ignite-light"]},
+      3px 2px 1px ${({ theme }) => theme.colors["rocketseat-light"]};
+  }
 `;
 
 export const NavigattionContainer = styled.nav`
+  //hidden in mobile
+  @media (max-width: 768px) {
+    display: none;
+  }
+
   ul {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -49,7 +138,7 @@ export const ProfileImageContainer = styled.div`
   border-radius: 50%;
   overflow: hidden;
   background-color: ${({ theme }) => theme.colors["grey-600"]};
-  border: solid 3px ${({ theme }) => theme.colors["ignite-light"]};
+  border: solid 1px ${({ theme }) => theme.colors["ignite-light"]};
   cursor: pointer;
   img {
     width: 100%;
@@ -63,6 +152,10 @@ export const ProfileContainer = styled.div`
   top: 6rem;
   right: -5.5rem;
 
+  @media (max-width: 768px) {
+    right: 1rem;
+  }
+
   width: 15rem;
   padding: 1.5rem 1rem;
   height: 20em;
@@ -74,7 +167,18 @@ export const ProfileContainer = styled.div`
   justify-content: space-between;
 `;
 
-export const ProfileHeader = styled.div``;
+export const ProfileHeader = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  svg {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    cursor: pointer;
+  }
+`;
 
 export const SocialContainer = styled.div`
   ul {
@@ -87,7 +191,7 @@ export const SocialContainer = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
+      border-radius: 2px;
       background-color: ${({ theme }) => theme.colors["grey-700"]};
     }
   }
