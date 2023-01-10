@@ -2,13 +2,18 @@
 
 import { format } from "date-fns";
 import Link from "next/link";
+import { parseCookies } from "nookies";
 import { MagnifyingGlass } from "phosphor-react";
 import { useContext } from "react";
+import { RotatingLines } from "react-loader-spinner";
 import { UserContext } from "../../contexts/UserContext";
-import { TableContainer } from "./TableRanking.styles";
+import { Button } from "../Button";
+import { RegressiveTimeButton } from "../RegressiveTimeButton";
+import { LoadingContainer, TableContainer } from "./TableRanking.styles";
 
 export function TableRanking() {
   const { users } = useContext(UserContext);
+  const HasUpdated = parseCookies().hasUpdated;
 
   const usersSorted = users?.sort((a, b) => {
     if (a.countIndication > b.countIndication) {
@@ -20,11 +25,19 @@ export function TableRanking() {
     return 0;
   });
 
-  const { onViewTickeModal } = useContext(UserContext);
+  const { onViewTickeModal, onUpdateAllUsers } = useContext(UserContext);
+
+  const onExpireDate = (): Date => {
+    if (HasUpdated) {
+      const date = new Date(HasUpdated);
+      date.setSeconds(date.getSeconds() + 1800);
+      return date;
+    }
+    return new Date();
+  };
 
   const date = users[0]?.updatedAt;
 
-  //fromat date to pt-BR format like 01/01/2021 00:00:00 with date-fns
   const formatDate = (date: string) => {
     if (!date) return null;
     const dateFormated = new Date(date);
@@ -35,42 +48,60 @@ export function TableRanking() {
 
   const dateUpdatedFormated = formatDate(date);
 
-  return (
+  return users.length ? (
     <TableContainer>
-      {dateUpdatedFormated ? (
-        <p>{`Última atualização: ${dateUpdatedFormated}`}</p>
-      ) : null}
-      {usersSorted?.length ? (
-        <table>
-          <thead>
-            <tr>
-              <th>Posição</th>
-              <th>Usuário</th>
-              <th>Indicações</th>
-              <th>Detalhes</th>
+      <div>
+        {dateUpdatedFormated ? (
+          <p>{`Última atualização: ${dateUpdatedFormated}`}</p>
+        ) : null}
+
+        {HasUpdated ? (
+          <RegressiveTimeButton expiryTimestamp={onExpireDate()} />
+        ) : (
+          <Button
+            color="warning"
+            onClick={onUpdateAllUsers}
+            disabled={Boolean(HasUpdated)}
+          >
+            Atualizar
+          </Button>
+        )}
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Posição</th>
+            <th>Usuário</th>
+            <th>Indicações</th>
+            <th>Detalhes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {usersSorted?.map((user, index) => (
+            <tr key={user.id}>
+              <td>{`${index + 1}º`}</td>
+              <td>{user.username}</td>
+              <td>{user.countIndication}</td>
+              <td>
+                <Link href="#" onClick={() => onViewTickeModal(user.username)}>
+                  <MagnifyingGlass size={24} /> ver detalhes
+                </Link>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {usersSorted?.map((user, index) => (
-              <tr key={user.id}>
-                <td>{`${index + 1}º`}</td>
-                <td>{user.username}</td>
-                <td>{user.countIndication}</td>
-                <td>
-                  <Link
-                    href="#"
-                    onClick={() => onViewTickeModal(user.username)}
-                  >
-                    <MagnifyingGlass size={24} /> ver detalhes
-                  </Link>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      ) : (
-        <h1>Nenhum usuário encontrado</h1>
-      )}
+          ))}
+        </tbody>
+      </table>
     </TableContainer>
+  ) : (
+    <LoadingContainer>
+      <RotatingLines
+        strokeColor="green"
+        strokeWidth="5"
+        animationDuration="0.75"
+        width="96"
+        visible={true}
+      />
+    </LoadingContainer>
   );
 }

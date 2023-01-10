@@ -10,6 +10,8 @@ import {
   IDataUpdateProps,
 } from "../services/EditProfile.service";
 import { GetAllUsersService } from "../services/GetAllUsers.service";
+import { UpdateAllUsersService } from "../services/UpdateAllUsers.service";
+import { useTimer } from "react-timer-hook";
 
 export interface IUser {
   id: string;
@@ -42,16 +44,18 @@ interface UserContextData {
   onLogoutAccount: () => void;
   onEditAccount: (data: IDataUpdateProps) => Promise<string | null>;
   onViewTickeModal: (username: string) => void;
-  showEditModal: boolean;
+  onUpdateAllUsers: () => Promise<void>;
+  onReloadUsers: () => Promise<void>;
   setShowEditModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserNameSelected: React.Dispatch<React.SetStateAction<string | null>>;
+  setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
+  setViewUser: React.Dispatch<React.SetStateAction<IUser>>;
+  showEditModal: boolean;
   user: IUser;
   users: IUser[];
   usernameSelected: string | null;
-  setUserNameSelected: React.Dispatch<React.SetStateAction<string | null>>;
   showTicketModal: boolean;
-  setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   viewUser: IUser;
-  setViewUser: React.Dispatch<React.SetStateAction<IUser>>;
 }
 
 export const UserContext = createContext({} as UserContextData);
@@ -104,6 +108,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
 
   const onLogoutAccount = (): void => {
     setCookie(null, "token", "");
+    setCookie(null, "hasUpdated", "");
     Router.push("/");
   };
 
@@ -131,6 +136,23 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     setShowTicketModal(true);
   };
 
+  const onReloadUsers = async (): Promise<void> => {
+    setUsers([]);
+    await GetAllUsers();
+  };
+
+  const onUpdateAllUsers = async (): Promise<void> => {
+    setUsers([]);
+    await UpdateAllUsersService(cookieToken);
+    await GetAllUsers();
+    const date = new Date();
+
+    setCookie(null, "hasUpdated", date.toString(), {
+      maxAge: 60 * 30,
+      path: "/",
+    });
+  };
+
   useEffect(() => {
     if (cookieToken) {
       GetUserLoguedData();
@@ -144,18 +166,20 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         onLogin,
         onDeleteAccount,
         onLogoutAccount,
-        setShowEditModal,
         onEditAccount,
         onViewTickeModal,
+        onUpdateAllUsers,
+        onReloadUsers,
+        setViewUser,
+        setShowEditModal,
         setShowTicketModal,
-        usernameSelected,
         setUserNameSelected,
+        usernameSelected,
         showTicketModal,
         user,
         showEditModal,
         users,
         viewUser,
-        setViewUser,
       }}
     >
       {children}

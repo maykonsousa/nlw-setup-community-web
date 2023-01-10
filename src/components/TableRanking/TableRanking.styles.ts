@@ -29,9 +29,19 @@ export const TableContainer = styled.div`
     font-size: 3rem;
     text-align: center;
   }
-  p {
-    margin-top: 2rem;
-    margin-left: 2rem;
+
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    p {
+      display: block;
+      width: 100%;
+    }
+    button {
+      width: 6rem;
+    }
   }
   table {
     width: 100%;
@@ -70,4 +80,15 @@ export const TableContainer = styled.div`
       }
     }
   }
+`;
+
+export const LoadingContainer = styled.div`
+  margin-top: 3rem;
+  overflow: auto;
+  max-height: 30rem;
+  min-height: 20rem;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
 `;
