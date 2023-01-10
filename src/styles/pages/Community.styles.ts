@@ -18,6 +18,15 @@ export const CommunityPageContainer = styled.div`
     justify-content: center;
   }
 
+  .swiper-button-next,
+  .swiper-button-prev {
+    color: ${({ theme }) => theme.colors["button-bg"]};
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: ${({ theme }) => theme.colors["warning-light"]};
+    }
+  }
   .swiper-pagination-bullet {
     width: 1rem;
     height: 1rem;

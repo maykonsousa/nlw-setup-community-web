@@ -16,7 +16,7 @@ const Community = () => {
       <Header />
       <Swiper
         modules={[Navigation, Pagination]}
-        navigation
+        navigation={true}
         pagination={{
           clickable: true,
           dynamicBullets: true,
