@@ -93,8 +93,17 @@ export const TableContainer = styled.div`
         border: 0;
         background: ${({ theme }) => theme.colors["grey-600"]};
         color: ${({ theme }) => theme.colors["text-base"]};
-
         border-left: solid 1px ${({ theme }) => theme.colors["grey-500"]};
+        //mobile
+        @media (max-width: 768px) {
+          padding: 1rem 1rem;
+
+          a {
+            span {
+              display: none;
+            }
+          }
+        }
         a {
           align-items: center;
           display: flex;

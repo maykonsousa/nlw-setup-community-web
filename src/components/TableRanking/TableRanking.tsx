@@ -78,18 +78,27 @@ export function TableRanking() {
           </tr>
         </thead>
         <tbody>
-          {usersSorted?.map((user, index) => (
-            <tr key={user.id}>
-              <td>{`${index + 1}º`}</td>
-              <td>{user.username}</td>
-              <td>{user.countIndication}</td>
-              <td>
-                <Link href="#" onClick={() => onViewTickeModal(user.username)}>
-                  <MagnifyingGlass size={24} /> ver detalhes
-                </Link>
-              </td>
-            </tr>
-          ))}
+          {usersSorted?.map((user, index) => {
+            const words = user.fullName.split(" ");
+            const firstName = words[0];
+            const lastName = words[words.length - 1];
+
+            return (
+              <tr key={user.id}>
+                <td>{`${index + 1}º`}</td>
+                <td>{`${firstName} ${lastName}`}</td>
+                <td>{user.countIndication}</td>
+                <td>
+                  <Link
+                    href="#"
+                    onClick={() => onViewTickeModal(user.username)}
+                  >
+                    <MagnifyingGlass size={24} /> <span>ver detalhes</span>
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </TableContainer>
