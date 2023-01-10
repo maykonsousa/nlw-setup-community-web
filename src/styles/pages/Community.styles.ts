@@ -3,13 +3,17 @@ import styled from "styled-components";
 export const CommunityPageContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
+  height: 760px;
 
-  height: 100%;
+  > h1 {
+    font-size: 4rem;
+  }
 
   .swiper {
     width: 100%;
-    height: calc(100vh - 6rem);
+    height: 100%;
     border: solid transparent 1px;
   }
 

@@ -14,15 +14,27 @@ const Community = () => {
   return (
     <CommunityPageContainer>
       <Header />
+      <h1>Community</h1>
       <Swiper
         modules={[Navigation, Pagination]}
         navigation={true}
+        breakpoints={{
+          1330: {
+            slidesPerView: 3,
+          },
+          820: {
+            slidesPerView: 2,
+          },
+
+          320: {
+            slidesPerView: 1,
+          },
+        }}
         pagination={{
           clickable: true,
           dynamicBullets: true,
           dynamicMainBullets: 10,
         }}
-        slidesPerView={3}
       >
         {users.map((user) => (
           <SwiperSlide key={user.id}>
