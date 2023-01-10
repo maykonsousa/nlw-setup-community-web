@@ -6,6 +6,9 @@ export const TableContainer = styled.div`
   max-height: 30rem;
   min-height: 20rem;
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
   border: solid 1px ${({ theme }) => theme.colors["grey-500"]};
   /* width */
   ::-webkit-scrollbar {
@@ -34,7 +37,30 @@ export const TableContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    width: 100%;
+    position: absolute;
+    top: 1rem;
+    left: 0rem;
+    right: 0rem;
+    height: 3rem;
     padding: 1rem 2rem;
+    min-width: 35rem;
+    //mobile
+    @media (max-width: 768px) {
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      margin: 0 auto;
+
+      p {
+        text-align: center;
+      }
+
+      button {
+        height: 3rem;
+      }
+    }
     p {
       display: block;
       width: 100%;
@@ -47,6 +73,7 @@ export const TableContainer = styled.div`
     width: 100%;
     border-spacing: 0 0.5rem;
     min-width: 35rem;
+    margin-top: 5rem;
     th {
       color: ${({ theme }) => theme.colors["text-base"]};
       font-weight: bold;

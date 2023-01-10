@@ -18,6 +18,7 @@ import IgniteIcon from "../../assets/ignite.svg";
 import { X } from "phosphor-react";
 import Image from "next/image";
 import Link from "next/link";
+import { format } from "date-fns";
 
 const { colors } = Default;
 const customStyles = {
@@ -56,7 +57,17 @@ export const ViewTiketModal = () => {
   };
 
   const URL_ROCKETSEAT = `https://nlw.rocketseat.com.br/obrigado/${viewUser.username}`;
-  console.log(URL_ROCKETSEAT);
+  const date = viewUser.updatedAt;
+
+  const formatDate = (date: string) => {
+    if (!date) return null;
+    const dateFormated = new Date(date);
+    //remove 3 hours to date
+    dateFormated.setHours(dateFormated.getHours() - 3);
+    return format(dateFormated, "dd/MM/yyyy HH:mm:ss");
+  };
+
+  const dateUpdatedFormated = formatDate(date);
   return (
     <ReactModal
       isOpen={showTicketModal}
@@ -126,7 +137,7 @@ export const ViewTiketModal = () => {
               </Link>
             </li>
           </ul>
-          <p>{`última atualização ${viewUser.updatedAt}`}</p>
+          <p>{`última atualização ${dateUpdatedFormated}`}</p>
         </Body>
         <Footer>
           <Link href={URL_ROCKETSEAT} target="_blank">
