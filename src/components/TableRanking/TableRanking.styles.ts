@@ -3,7 +3,7 @@ import styled from "styled-components";
 export const TableContainer = styled.div`
   margin-top: 3rem;
   overflow: auto;
-  max-height: 30rem;
+  max-height: calc(40rem);
   min-height: 20rem;
   width: 100%;
   display: flex;
