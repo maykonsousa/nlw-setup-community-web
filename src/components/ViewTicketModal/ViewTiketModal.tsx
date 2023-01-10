@@ -26,7 +26,7 @@ const customStyles = {
     top: "10rem",
     bottom: "2rem",
     width: "340px",
-    height: "600px",
+    height: "580px",
     border: "none",
     margin: "auto",
     padding: "0",
@@ -45,7 +45,6 @@ export const ViewTiketModal = () => {
     setShowTicketModal,
     showTicketModal,
     setUserNameSelected,
-    usernameSelected,
     viewUser,
     setViewUser,
   } = useContext(UserContext);
