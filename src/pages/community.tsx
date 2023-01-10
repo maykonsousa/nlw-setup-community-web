@@ -2,7 +2,7 @@ import React from "react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper";
+import { Navigation, Pagination, Keyboard } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Header } from "../components/Header";
 import { UserCard } from "../components/UserCard";
@@ -16,8 +16,9 @@ const Community = () => {
       <Header />
       <h1>Community</h1>
       <Swiper
-        modules={[Navigation, Pagination]}
+        modules={[Navigation, Pagination, Keyboard]}
         navigation={true}
+        keyboard={true}
         breakpoints={{
           1330: {
             slidesPerView: 3,
