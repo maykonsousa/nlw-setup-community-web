@@ -11,7 +11,6 @@ import {
 } from "../services/EditProfile.service";
 import { GetAllUsersService } from "../services/GetAllUsers.service";
 import { UpdateAllUsersService } from "../services/UpdateAllUsers.service";
-import { useTimer } from "react-timer-hook";
 
 export interface IUser {
   id: string;
@@ -50,12 +49,14 @@ interface UserContextData {
   setUserNameSelected: React.Dispatch<React.SetStateAction<string | null>>;
   setShowTicketModal: React.Dispatch<React.SetStateAction<boolean>>;
   setViewUser: React.Dispatch<React.SetStateAction<IUser>>;
+  setPageLoad: React.Dispatch<React.SetStateAction<boolean>>;
   showEditModal: boolean;
   user: IUser;
   users: IUser[];
   usernameSelected: string | null;
   showTicketModal: boolean;
   viewUser: IUser;
+  pageLoad: boolean;
 }
 
 export const UserContext = createContext({} as UserContextData);
@@ -67,8 +68,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const [usernameSelected, setUserNameSelected] = useState<string | null>(null);
   const [showTicketModal, setShowTicketModal] = useState(false);
   const [viewUser, setViewUser] = useState<IUser>({} as IUser);
+  const [pageLoad, setPageLoad] = useState(false);
 
   const cookieToken = parseCookies().token;
+
+  const OnLoadPage = async (): Promise<void> => {
+    setPageLoad(true);
+    setTimeout(() => {
+      setPageLoad(false);
+    }, 2000);
+  };
 
   const onLogin = async ({
     username,
@@ -80,7 +89,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         maxAge: 60 * 60 * 24 * 30, // 30 days
         path: "/",
       });
-
+      await OnLoadPage();
       Router.push("/ranking");
     }
     return { data, error };
@@ -98,6 +107,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   };
 
   const onDeleteAccount = async (): Promise<void> => {
+    OnLoadPage();
     await DeleteAccountService(`${cookieToken}`);
 
     setCookie(null, "token", "");
@@ -157,6 +167,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
     if (cookieToken) {
       GetUserLoguedData();
       GetAllUsers();
+      OnLoadPage();
     }
   }, [cookieToken]);
 
@@ -174,12 +185,14 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         setShowEditModal,
         setShowTicketModal,
         setUserNameSelected,
+        setPageLoad,
         usernameSelected,
         showTicketModal,
         user,
         showEditModal,
         users,
         viewUser,
+        pageLoad,
       }}
     >
       {children}

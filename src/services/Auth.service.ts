@@ -32,8 +32,20 @@ export const AuthService = async ({
       password,
     });
 
+    const name = data.userIformations.fullName
+      .split(" ")
+      .filter((word) => word !== "");
+    const fullName = name[0] + " " + name[name.length - 1];
+    const dataFormated = {
+      ...data,
+      userIformations: {
+        ...data.userIformations,
+        fullName,
+      },
+    };
+
     return {
-      data,
+      data: dataFormated,
       error: null,
     };
   } catch (err) {

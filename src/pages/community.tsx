@@ -8,10 +8,13 @@ import { Header } from "../components/Header";
 import { UserCard } from "../components/UserCard";
 import { UserContext } from "../contexts/UserContext";
 import { CommunityPageContainer } from "../styles/pages/Community.styles";
+import { PageLoad } from "../components/PageLoad";
 
 const Community = () => {
-  const { users } = React.useContext(UserContext);
-  return (
+  const { users, pageLoad } = React.useContext(UserContext);
+  return pageLoad ? (
+    <PageLoad />
+  ) : (
     <CommunityPageContainer>
       <Header />
       <h1>Community</h1>
