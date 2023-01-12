@@ -1,4 +1,3 @@
-import { X } from "phosphor-react";
 import React, { useContext, useState } from "react";
 import ReactModal from "react-modal";
 import { UserContext } from "../../contexts/UserContext";
@@ -6,6 +5,7 @@ import { Default } from "../../styles/themes/default";
 import { Button } from "../Button";
 import { Input } from "../Input";
 import { ConfirmRequest } from "./ConfirmRequest";
+import { FiX } from "react-icons/fi";
 import {
   EditButtonContainer,
   ModalContainer,
@@ -143,7 +143,7 @@ export const EditProfleModal = () => {
       <ModalContainer>
         <ModalHeader>
           <h1>Editar Perfil</h1>
-          <X size={32} onClick={cancelEdit} />
+          <FiX size={32} onClick={cancelEdit} />
         </ModalHeader>
         {loading || successCall || errorCall ? (
           <ConfirmRequest

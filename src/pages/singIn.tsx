@@ -25,7 +25,7 @@ const SignIn = () => {
   return (
     <SignInContainer>
       <SignInContent>
-        <Image src={VerticalLogo} alt="logo" />
+        <VerticalLogo />
         <h1>
           <span>COMMUNITY</span>
         </h1>

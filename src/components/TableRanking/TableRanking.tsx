@@ -3,13 +3,13 @@
 import { format } from "date-fns";
 import Link from "next/link";
 import { parseCookies } from "nookies";
-import { MagnifyingGlass } from "phosphor-react";
 import { useContext } from "react";
 import { RotatingLines } from "react-loader-spinner";
 import { UserContext } from "../../contexts/UserContext";
 import { Button } from "../Button";
 import { RegressiveTimeButton } from "../RegressiveTimeButton";
 import { LoadingContainer, TableContainer } from "./TableRanking.styles";
+import { HiMagnifyingGlassPlus } from "react-icons/hi2";
 
 export function TableRanking() {
   const { users } = useContext(UserContext);
@@ -78,27 +78,18 @@ export function TableRanking() {
           </tr>
         </thead>
         <tbody>
-          {usersSorted?.map((user, index) => {
-            const words = user.fullName.split(" ");
-            const firstName = words[0];
-            const lastName = words[words.length - 1];
-
-            return (
-              <tr key={user.id}>
-                <td>{`${index + 1}º`}</td>
-                <td>{`${firstName} ${lastName}`}</td>
-                <td>{user.countIndication}</td>
-                <td>
-                  <Link
-                    href="#"
-                    onClick={() => onViewTickeModal(user.username)}
-                  >
-                    <MagnifyingGlass size={24} /> <span>ver detalhes</span>
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
+          {usersSorted?.map((user, index) => (
+            <tr key={user.id}>
+              <td>{`${index + 1}º`}</td>
+              <td>{user.fullName}</td>
+              <td>{user.countIndication}</td>
+              <td>
+                <Link href="#" onClick={() => onViewTickeModal(user.username)}>
+                  <HiMagnifyingGlassPlus size={24} /> <span>ver detalhes</span>
+                </Link>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </TableContainer>

@@ -1,19 +1,16 @@
-import { Info } from 'phosphor-react'
-import React from 'react'
-import { ToolTipContainer, ToolTipText } from './ToolTip.styles'
+import React from "react";
+import { FiAlertCircle } from "react-icons/fi";
+import { ToolTipContainer, ToolTipText } from "./ToolTip.styles";
 
-interface ToolTipInfoProps { 
-    message: string
+interface ToolTipInfoProps {
+  message: string;
 }
 
-export const ToolTipInfo = ({ message}: ToolTipInfoProps) => {
-
+export const ToolTipInfo = ({ message }: ToolTipInfoProps) => {
   return (
-      <ToolTipContainer>
-          <Info size={18} />
-          <ToolTipText>{message}</ToolTipText>
-       
-        
-      </ToolTipContainer>
-  )
-}
+    <ToolTipContainer>
+      <FiAlertCircle />
+      <ToolTipText>{message}</ToolTipText>
+    </ToolTipContainer>
+  );
+};

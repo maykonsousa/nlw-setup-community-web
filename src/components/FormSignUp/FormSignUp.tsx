@@ -1,6 +1,6 @@
 import Router from "next/router";
-import { Trash } from "phosphor-react";
 import React, { useEffect, useState } from "react";
+import { FiTrash2 } from "react-icons/fi";
 import { CreateUser } from "../../services/PostUser.service";
 import { Input } from "../Input";
 import { ButtonsContainer, FormSignUpContainer } from "./FormSignUp.styles";
@@ -174,7 +174,7 @@ export const FormSignUp = ({ user }: FormSignUpProps) => {
       <ButtonsContainer>
         <button type="submit">Cadastrar</button>
         <button type="reset" className="reset" onClick={handleClean}>
-          <Trash />
+          <FiTrash2 />
         </button>
       </ButtonsContainer>
     </FormSignUpContainer>

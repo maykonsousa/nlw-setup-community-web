@@ -3,8 +3,8 @@ import React, { useContext } from "react";
 import { ButtonContainer } from "./RegressiveTimeButton.styles";
 import { useTimer } from "react-timer-hook";
 import { parseCookies, setCookie } from "nookies";
-import { ClockCounterClockwise } from "phosphor-react";
 import { UserContext } from "../../contexts/UserContext";
+import { FiClock } from "react-icons/fi";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   expiryTimestamp: Date;
@@ -34,7 +34,7 @@ export const RegressiveTimeButton = ({
 
   return (
     <ButtonContainer {...props}>
-      <ClockCounterClockwise size={24} />
+      <FiClock size={24} />
       <span>
         {minutes}:{seconds}
       </span>

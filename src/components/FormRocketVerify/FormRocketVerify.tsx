@@ -1,5 +1,5 @@
-import { FileSearch, MagnifyingGlass } from "phosphor-react";
 import React from "react";
+import { HiMagnifyingGlassPlus } from "react-icons/hi2";
 import { ToolTipInfo } from "../ToolTipInfo/ToolTipInfo";
 import { FormContainer } from "./FormRocketVerify.styles";
 
@@ -43,7 +43,7 @@ export const FormRocketVerify = ({
             }}
           />
           <button type="submit">
-            <MagnifyingGlass size={32} />
+            <HiMagnifyingGlassPlus size={24} />
           </button>
         </div>
 

@@ -9,12 +9,11 @@ import {
   ViewTicketModalContainer,
 } from "./UserCard.styles";
 import GeneralAvatar from "../../assets/developer-icon.webp";
-import GitHubIcon from "../../assets/github.svg";
-import LinkedinIcon from "../../assets/linkedin.svg";
-import IgniteIcon from "../../assets/ignite.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
+import { IoRocket } from "react-icons/io5";
 
 interface IuserCardProps {
   user: IUser;
@@ -79,30 +78,32 @@ export const UserCard = ({ user }: IuserCardProps) => {
 
         <ul className="SocialMedia">
           <li>
-            <Link href={user?.githubProfile ?? "#"} target="_blank">
-              <Image src={GitHubIcon} width={32} height={32} alt={"Github"} />
+            <Link
+              href={user?.githubProfile ?? ""}
+              target="_blank"
+              className={!user.githubProfile ? "disabled" : ""}
+            >
+              <FaGithubSquare size={48} />
             </Link>
           </li>
 
           <li>
-            <Link href={user?.linkedinProfile ?? "#"} target="_blank">
-              <Image
-                src={LinkedinIcon}
-                width={32}
-                height={32}
-                alt={"Linkedin"}
-              />
+            <Link
+              href={user?.linkedinProfile ?? null}
+              target="_blank"
+              className={!user.linkedinProfile ? "disabled" : ""}
+            >
+              <FaLinkedin size={48} />
             </Link>
           </li>
 
           <li>
-            <Link href={user?.rocketseatProfile ?? "#"} target="_blank">
-              <Image
-                src={IgniteIcon}
-                width={32}
-                height={32}
-                alt={"Rocketseat"}
-              />
+            <Link
+              href={user?.rocketseatProfile ?? ""}
+              target="_blank"
+              className={!user.rocketseatProfile ? "disabled" : ""}
+            >
+              <IoRocket size={48} />
             </Link>
           </li>
         </ul>

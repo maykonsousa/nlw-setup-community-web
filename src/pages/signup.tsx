@@ -82,7 +82,7 @@ const SignUp = () => {
         </SignUpContentMobile>
       </SignUpForm>
       <SignUpContent>
-        <Image src={VerticalLogo} alt="logo" />
+        <VerticalLogo />
         <h1>
           <span>COMMUNITY</span>
         </h1>

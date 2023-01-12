@@ -15,10 +15,10 @@ import GeneralAvatar from "../../assets/developer-icon.webp";
 import GitHubIcon from "../../assets/github.svg";
 import LinkedinIcon from "../../assets/linkedin.svg";
 import IgniteIcon from "../../assets/ignite.svg";
-import { X } from "phosphor-react";
 import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
+import { FiX } from "react-icons/fi";
 
 const { colors } = Default;
 const customStyles = {
@@ -75,7 +75,7 @@ export const ViewTiketModal = () => {
     >
       <ViewTicketModalContainer>
         <Header>
-          <X size={24} onClick={onCloseModal} />
+          <FiX size={24} onClick={onCloseModal} />
         </Header>
         <Body>
           <ProfileImageContainer>

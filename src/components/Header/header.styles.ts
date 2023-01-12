@@ -183,16 +183,33 @@ export const ProfileHeader = styled.div`
 export const SocialContainer = styled.div`
   ul {
     display: flex;
+    justify-content: space-between;
     list-style: none;
+    margin-top: 2rem;
     gap: 2rem;
     li {
-      width: 3rem;
-      height: 3rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 2px;
-      background-color: ${({ theme }) => theme.colors["grey-700"]};
+
+      a.disabled {
+        cursor: not-allowed;
+        svg {
+          color: ${({ theme }) => theme.colors["grey-600"]};
+        }
+      }
+
+      svg {
+        color: ${({ theme }) => theme.colors["rocketseat-light"]};
+        border: Solid 1px ${({ theme }) => theme.colors["ignite-light"]};
+        border-radius: 4px;
+        transition: all 0.2s;
+
+        &:hover {
+          color: ${({ theme }) => theme.colors["ignite-light"]};
+          border: Solid 1px ${({ theme }) => theme.colors["rocketseat-light"]};
+        }
+      }
     }
   }
 `;

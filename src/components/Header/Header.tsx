@@ -17,13 +17,16 @@ import {
 import BrandLogo from "../../assets/brand.svg";
 import Link from "next/link";
 import { UserContext } from "../../contexts/UserContext";
-import { List, Pencil, Power, Trash, X } from "phosphor-react";
 import IgniteIcon from "../../assets/ignite.svg";
 import GitHubIcon from "../../assets/github.svg";
 import LinkedinIcon from "../../assets/linkedin.svg";
 import GeneralAvatar from "../../assets/developer-icon.webp";
 import { EditProfleModal } from "../EditProfileModal";
 import { Button } from "../Button";
+import { FiEdit, FiPower, FiTrash2, FiX } from "react-icons/fi";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoRocket } from "react-icons/io5";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 
 interface IConfimationProps {
   message: string;
@@ -71,13 +74,13 @@ export const Header = () => {
         <IconMenuMobileContainer
           onClick={() => setShowMenuMobile(!showMenuMobile)}
         >
-          <List size={32} />
+          <GiHamburgerMenu size={32} />
         </IconMenuMobileContainer>
         {showMenuMobile && (
           <MenuMobileContainer>
             <div>
               <h1>Menu</h1>
-              <X size={24} onClick={() => setShowMenuMobile(false)} />
+              <FiX size={24} onClick={() => setShowMenuMobile(false)} />
             </div>
             <ul>
               <li>
@@ -93,7 +96,7 @@ export const Header = () => {
           </MenuMobileContainer>
         )}
         <BrandContainer>
-          <Image src={BrandLogo} alt={"Logo NLW"} />
+          <BrandLogo />
           <h1>COMMUNITY</h1>
         </BrandContainer>
         <NavigattionContainer>
@@ -131,41 +134,38 @@ export const Header = () => {
             <ProfileHeader>
               <h2>{user?.fullName}</h2>
               <p>{user?.bio}</p>
-              <X size={24} onClick={() => setShowProfile(false)} />
+              <FiX size={24} onClick={() => setShowProfile(false)} />
             </ProfileHeader>
 
             <SocialContainer>
-              <ul>
+              <ul className="SocialMedia">
                 <li>
-                  <Link href={user?.githubProfile ?? "#"} target="_blank">
-                    <Image
-                      src={GitHubIcon}
-                      width={32}
-                      height={32}
-                      alt={"Github"}
-                    />
+                  <Link
+                    href={user?.githubProfile ?? ""}
+                    target="_blank"
+                    className={!user.githubProfile ? "disabled" : ""}
+                  >
+                    <FaGithubSquare size={48} />
                   </Link>
                 </li>
 
                 <li>
-                  <Link href={user?.linkedinProfile ?? "#"} target="_blank">
-                    <Image
-                      src={LinkedinIcon}
-                      width={32}
-                      height={32}
-                      alt={"Linkedin"}
-                    />
+                  <Link
+                    href={user?.linkedinProfile ?? null}
+                    target="_blank"
+                    className={!user.linkedinProfile ? "disabled" : ""}
+                  >
+                    <FaLinkedin size={48} />
                   </Link>
                 </li>
 
                 <li>
-                  <Link href={user?.rocketseatProfile ?? "#"} target="_blank">
-                    <Image
-                      src={IgniteIcon}
-                      width={32}
-                      height={32}
-                      alt={"Rocketseat"}
-                    />
+                  <Link
+                    href={user?.rocketseatProfile ?? ""}
+                    target="_blank"
+                    className={!user.rocketseatProfile ? "disabled" : ""}
+                  >
+                    <IoRocket size={48} />
                   </Link>
                 </li>
               </ul>
@@ -195,7 +195,7 @@ export const Header = () => {
                     setShowProfile(false);
                   }}
                 >
-                  <Pencil size={24} />
+                  <FiEdit size={24} />
                 </Button>
                 <Button
                   color="danger"
@@ -204,7 +204,7 @@ export const Header = () => {
                     setMessage(DELETE_ACCOUNT_MESSAGE);
                   }}
                 >
-                  <Trash size={24} />
+                  <FiTrash2 size={24} />
                 </Button>
                 <Button
                   color="warning"
@@ -213,7 +213,7 @@ export const Header = () => {
                     setMessage(GET_OUT_MESSAGE);
                   }}
                 >
-                  <Power size={24} />
+                  <FiPower size={24} />
                 </Button>
               </ProfileFooter>
             )}

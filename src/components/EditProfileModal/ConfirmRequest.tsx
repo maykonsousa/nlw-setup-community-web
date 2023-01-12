@@ -1,5 +1,6 @@
-import { CheckSquare, ShieldWarning } from "phosphor-react";
 import React from "react";
+import { FiCheckSquare } from "react-icons/fi";
+import { TiWarningOutline } from "react-icons/ti";
 import { RotatingLines } from "react-loader-spinner";
 import {
   ConfirmModalContainer,
@@ -32,13 +33,13 @@ export const ConfirmRequest = ({
 
       {success && (
         <SuccessContainer>
-          <CheckSquare size={120} />
+          <FiCheckSquare size={120} />
           <p>Dados Atualizados com sucesso!</p>
         </SuccessContainer>
       )}
       {error && (
         <ErrorContainer>
-          <ShieldWarning size={120} />
+          <TiWarningOutline size={120} />
           <p>Falha ao Atualizar os dados. Tente Novamente mais tarde!</p>
         </ErrorContainer>
       )}
