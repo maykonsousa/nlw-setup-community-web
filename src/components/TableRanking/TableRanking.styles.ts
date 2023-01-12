@@ -89,11 +89,17 @@ export const TableContainer = styled.div`
         }
       }
       td {
-        padding: 1rem 2rem;
+        padding: 0.5rem 2rem;
         border: 0;
         background: ${({ theme }) => theme.colors["grey-600"]};
         color: ${({ theme }) => theme.colors["text-base"]};
         border-left: solid 1px ${({ theme }) => theme.colors["grey-500"]};
+
+        &.profile {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+        }
         //mobile
         @media (max-width: 768px) {
           padding: 1rem 1rem;
@@ -127,4 +133,19 @@ export const LoadingContainer = styled.div`
   align-items: center;
   justify-content: center;
   display: flex;
+`;
+
+export const ProfileImageContainer = styled.div`
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: ${({ theme }) => theme.colors["grey-600"]};
+  border: solid 1px ${({ theme }) => theme.colors["ignite-light"]};
+  cursor: pointer;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 `;

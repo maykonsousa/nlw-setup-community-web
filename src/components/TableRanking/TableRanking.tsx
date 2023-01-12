@@ -8,8 +8,14 @@ import { RotatingLines } from "react-loader-spinner";
 import { UserContext } from "../../contexts/UserContext";
 import { Button } from "../Button";
 import { RegressiveTimeButton } from "../RegressiveTimeButton";
-import { LoadingContainer, TableContainer } from "./TableRanking.styles";
+import {
+  LoadingContainer,
+  ProfileImageContainer,
+  TableContainer,
+} from "./TableRanking.styles";
 import { HiMagnifyingGlassPlus } from "react-icons/hi2";
+import GeneralAvatar from "../../assets/developer-icon.webp";
+import Image from "next/image";
 
 export function TableRanking() {
   const { users } = useContext(UserContext);
@@ -74,20 +80,35 @@ export function TableRanking() {
             <th>Posição</th>
             <th>Usuário</th>
             <th>Indicações</th>
-            <th>Detalhes</th>
           </tr>
         </thead>
         <tbody>
           {usersSorted?.map((user, index) => (
             <tr key={user.id}>
               <td>{`${index + 1}º`}</td>
-              <td>{user.fullName}</td>
-              <td>{user.countIndication}</td>
-              <td>
-                <Link href="#" onClick={() => onViewTickeModal(user.username)}>
-                  <HiMagnifyingGlassPlus size={24} /> <span>ver detalhes</span>
-                </Link>
+              <td className="profile">
+                <ProfileImageContainer
+                  onClick={() => onViewTickeModal(user.username)}
+                >
+                  {user?.avatarUrl ? (
+                    <Image
+                      src={user.avatarUrl}
+                      width={120}
+                      height={120}
+                      alt={"Foto de perfil"}
+                    />
+                  ) : (
+                    <Image
+                      src={GeneralAvatar.src}
+                      width={120}
+                      height={120}
+                      alt={"Foto de perfil"}
+                    />
+                  )}
+                </ProfileImageContainer>
+                {user.fullName}
               </td>
+              <td>{user.countIndication}</td>
             </tr>
           ))}
         </tbody>
