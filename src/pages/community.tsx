@@ -17,7 +17,7 @@ const Community = () => {
   ) : (
     <CommunityPageContainer>
       <Header />
-      <h1>Community</h1>
+
       <Swiper
         modules={[Navigation, Pagination, Keyboard]}
         navigation={true}

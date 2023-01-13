@@ -9,6 +9,8 @@ export const FooterContainer = styled.footer`
   height: 5rem;
   width: 100%;
   color: ${({ theme }) => theme.colors["text-base"]};
+  position: fixed;
+  bottom: 0;
 
   svg {
     color: ${({ theme }) => theme.colors["danger-base"]};
