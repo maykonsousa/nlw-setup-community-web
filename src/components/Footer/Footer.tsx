@@ -8,9 +8,10 @@ export const Footer = () => {
     <FooterContainer>
       <IoWarning size={36} />
       <p>
-        <span>Obs:</span> A NLW Ranking não é aplicação oficial da Rocketseat e
-        reúne dados apenas dos usuários cadastrados aqui. <br /> Para
-        informações oficiais acompanhe os canais oficiais da Rocketseat na{" "}
+        <span>Obs:</span> <strong>A NLW Community</strong> não é aplicação
+        oficial da Rocketseat e reúne dados apenas dos usuários cadastrados
+        aqui. <br /> Para informações oficiais acompanhe os canais oficiais da
+        Rocketseat na{" "}
         <Link href="http://app.rocketseat.com.br" target="_blank">
           Plataforma Oficial
         </Link>
