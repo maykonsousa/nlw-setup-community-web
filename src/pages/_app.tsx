@@ -7,6 +7,7 @@ import { Default } from "../styles/themes/default";
 import { AppContainer, MainContainer } from "../styles/pages/app.styles";
 import { UserProvider } from "../contexts/UserContext";
 import Head from "next/head";
+import { Footer } from "../components/Footer";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -19,6 +20,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <AppContainer>
           <MainContainer>
             <Component {...pageProps} />
+            <Footer />
           </MainContainer>
         </AppContainer>
       </UserProvider>
