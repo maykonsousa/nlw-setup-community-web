@@ -44,22 +44,10 @@ export function TableRanking() {
 
   const date = users[0]?.updatedAt;
 
-  const formatDate = (date: string) => {
-    if (!date) return null;
-    const dateFormated = new Date(date);
-    //remove 3 hours to date
-    dateFormated.setHours(dateFormated.getHours() - 3);
-    return format(dateFormated, "dd/MM/yyyy HH:mm:ss");
-  };
-
-  const dateUpdatedFormated = formatDate(date);
-
   return users.length ? (
     <TableContainer>
       <div>
-        {dateUpdatedFormated ? (
-          <p>{`Última atualização: ${dateUpdatedFormated}`}</p>
-        ) : null}
+        {date ? <p>{`Última atualização: ${date}`}</p> : null}
 
         {HasUpdated ? (
           <RegressiveTimeButton expiryTimestamp={onExpireDate()} />
