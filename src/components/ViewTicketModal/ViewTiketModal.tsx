@@ -113,7 +113,7 @@ export const ViewTiketModal = () => {
 
             <li>
               <Link
-                href={viewUser?.linkedinProfile ?? null}
+                href={viewUser?.linkedinProfile ?? ""}
                 target="_blank"
                 className={!viewUser.linkedinProfile ? "disabled" : ""}
               >
