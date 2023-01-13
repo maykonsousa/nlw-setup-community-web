@@ -28,16 +28,6 @@ export const UserCard = ({ user }: IuserCardProps) => {
   const firstName = formatedname[0];
   const lastName = formatedname[formatedname.length - 1];
 
-  console.log(name);
-
-  const formatDate = (date: string) => {
-    if (!date) return null;
-    const dateFormated = new Date(date);
-    dateFormated.setHours(dateFormated.getHours() - 3);
-    return format(dateFormated, "dd/MM/yyyy HH:mm:ss");
-  };
-
-  const dateUpdatedFormated = formatDate(date);
   return (
     <ViewTicketModalContainer>
       <Header />
@@ -107,7 +97,7 @@ export const UserCard = ({ user }: IuserCardProps) => {
             </Link>
           </li>
         </ul>
-        <p>{`última atualização ${dateUpdatedFormated}`}</p>
+        <p>{`última atualização ${date}`}</p>
       </Body>
       <Footer>
         <Link href={URL_ROCKETSEAT} target="_blank">
