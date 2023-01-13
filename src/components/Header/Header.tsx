@@ -17,9 +17,6 @@ import {
 import BrandLogo from "../../assets/brand.svg";
 import Link from "next/link";
 import { UserContext } from "../../contexts/UserContext";
-import IgniteIcon from "../../assets/ignite.svg";
-import GitHubIcon from "../../assets/github.svg";
-import LinkedinIcon from "../../assets/linkedin.svg";
 import GeneralAvatar from "../../assets/developer-icon.webp";
 import { EditProfleModal } from "../EditProfileModal";
 import { Button } from "../Button";
