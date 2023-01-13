@@ -1,7 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 
-import { format } from "date-fns";
-import Link from "next/link";
 import { parseCookies } from "nookies";
 import { useContext } from "react";
 import { RotatingLines } from "react-loader-spinner";
@@ -13,7 +11,6 @@ import {
   ProfileImageContainer,
   TableContainer,
 } from "./TableRanking.styles";
-import { HiMagnifyingGlassPlus } from "react-icons/hi2";
 import GeneralAvatar from "../../assets/developer-icon.webp";
 import Image from "next/image";
 
