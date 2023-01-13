@@ -11,7 +11,6 @@ import {
 import GeneralAvatar from "../../assets/developer-icon.webp";
 import Image from "next/image";
 import Link from "next/link";
-import { format } from "date-fns";
 import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
 import { IoRocket } from "react-icons/io5";
 
