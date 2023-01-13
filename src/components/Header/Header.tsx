@@ -151,7 +151,7 @@ export const Header = () => {
 
                 <li>
                   <Link
-                    href={user?.linkedinProfile ?? null}
+                    href={user?.linkedinProfile ?? ""}
                     target="_blank"
                     className={!user.linkedinProfile ? "disabled" : ""}
                   >
