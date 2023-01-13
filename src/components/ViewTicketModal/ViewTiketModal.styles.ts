@@ -44,16 +44,26 @@ export const Body = styled.div`
     margin-top: 2rem;
     gap: 2rem;
     li {
-      width: 3rem;
-      height: 3rem;
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 4px;
-      background-color: ${({ theme }) => theme.colors["grey-800"]};
 
-      &:hover {
-        background-color: ${({ theme }) => theme.colors["grey-400"]};
+      a.disabled {
+        cursor: not-allowed;
+        svg {
+          color: ${({ theme }) => theme.colors["grey-600"]};
+        }
+      }
+
+      svg {
+        color: ${({ theme }) => theme.colors["rocketseat-dark"]};
+        border: Solid 1px ${({ theme }) => theme.colors["rocketseat-dark"]};
+        border-radius: 4px;
+
+        &:hover {
+          color: ${({ theme }) => theme.colors["rocketseat-light"]};
+          border: Solid 1px ${({ theme }) => theme.colors["rocketseat-light"]};
+        }
       }
     }
   }

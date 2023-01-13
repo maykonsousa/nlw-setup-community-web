@@ -19,6 +19,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { format } from "date-fns";
 import { FiX } from "react-icons/fi";
+import { FaGithubSquare, FaLinkedin } from "react-icons/fa";
+import { IoRocket } from "react-icons/io5";
 
 const { colors } = Default;
 const customStyles = {
@@ -100,30 +102,32 @@ export const ViewTiketModal = () => {
 
           <ul className="SocialMedia">
             <li>
-              <Link href={viewUser?.githubProfile ?? "#"} target="_blank">
-                <Image src={GitHubIcon} width={32} height={32} alt={"Github"} />
+              <Link
+                href={viewUser?.githubProfile ?? ""}
+                target="_blank"
+                className={!viewUser.githubProfile ? "disabled" : ""}
+              >
+                <FaGithubSquare size={48} />
               </Link>
             </li>
 
             <li>
-              <Link href={viewUser?.linkedinProfile ?? "#"} target="_blank">
-                <Image
-                  src={LinkedinIcon}
-                  width={32}
-                  height={32}
-                  alt={"Linkedin"}
-                />
+              <Link
+                href={viewUser?.linkedinProfile ?? null}
+                target="_blank"
+                className={!viewUser.linkedinProfile ? "disabled" : ""}
+              >
+                <FaLinkedin size={48} />
               </Link>
             </li>
 
             <li>
-              <Link href={viewUser?.rocketseatProfile ?? "#"} target="_blank">
-                <Image
-                  src={IgniteIcon}
-                  width={32}
-                  height={32}
-                  alt={"Rocketseat"}
-                />
+              <Link
+                href={viewUser?.rocketseatProfile ?? ""}
+                target="_blank"
+                className={!viewUser.rocketseatProfile ? "disabled" : ""}
+              >
+                <IoRocket size={48} />
               </Link>
             </li>
           </ul>
