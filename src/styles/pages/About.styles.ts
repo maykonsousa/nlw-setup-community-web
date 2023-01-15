@@ -26,6 +26,12 @@ export const Main = styled.main`
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 2rem;
+  padding: 2rem;
+
+  @media (max-width: 720px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const Aside = styled.aside`
@@ -36,6 +42,10 @@ export const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  @media (max-width: 720px) {
+    width: 100%;
+  }
 `;
 
 export const ProfileContainer = styled.div`
@@ -129,13 +139,20 @@ export const TecnologiesContainer = styled.div`
 `;
 
 export const Content = styled.div`
-  width: 80rem;
   height: 37rem;
   flex: 1;
-  display: block;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: ${({ theme }) => theme.colors["grey-800"]};
   box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px;
+
+  //mobile
+  @media (max-width: 720px) {
+    width: 100%;
+    height: 100%;
+    div {
+      display: none;
+    }
+  }
 `;
