@@ -8,7 +8,7 @@ const Forgot = () => {
     <ForgotContainer>
       <h1>Poxa! Esqueceu a senha?</h1>
       <p>
-        Pior que eu tambem esqueci de criar um método para recuperar e agora eu
+        Pior que eu também esqueci de criar um método para recuperar e agora eu
         não tenho muito o que fazer,
       </p>
       <p>
