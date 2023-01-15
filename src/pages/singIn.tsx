@@ -1,5 +1,4 @@
 import VerticalLogo from "../assets/logoVertical.svg";
-import Image from "next/image";
 import {
   ActionContainer,
   SignInContainer,
@@ -55,7 +54,7 @@ const SignIn = () => {
             Ainda não tem cadastro? <Link href="/signup">Cadastre-se</Link>
           </p>
           <p>
-            Esqueceu a senha? <a>Recuperar</a>{" "}
+            Esqueceu a senha? <Link href="/forgot">Recuperar</Link>{" "}
           </p>
         </div>
       </SignInForm>
