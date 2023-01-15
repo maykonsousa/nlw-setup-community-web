@@ -26,7 +26,7 @@ export const Main = styled.main`
   display: grid;
   grid-template-columns: 1fr 3fr;
   gap: 2rem;
-  padding: 2rem;
+  padding: 0 2rem;
 
   @media (max-width: 720px) {
     display: flex;
