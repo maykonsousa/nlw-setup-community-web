@@ -21,6 +21,15 @@ export default function App({ Component, pageProps }: AppProps) {
         <GlobalStyle />
         <Head>
           <title>NLW Community</title>
+          <meta property="og:title" content="NLW Community" key="title" />
+          <meta
+            property="og:image"
+            content="https://uploaddeimagens.com.br/imagens/TfU8KCM"
+          />
+          <meta property="og:image:type" content="image/jpg" />
+          <meta property="og:image:width" content="1200" />
+          <meta property="og:image:height" content="630" />
+          <meta property="og:image:alt" content="NLW Community" />
         </Head>
         <AppContainer>
           <MainContainer>
