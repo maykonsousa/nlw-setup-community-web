@@ -30,6 +30,10 @@ export default function App({ Component, pageProps }: AppProps) {
           <meta property="og:image:width" content="1200" />
           <meta property="og:image:height" content="630" />
           <meta property="og:image:alt" content="NLW Community" />
+          <meta
+            property="og:description"
+            content="Plataforma independente criada exclusivamente para reunir os aluos do NLW SETUP. Cadastre-se e tenha acesso á rankind de indicações e redes sociais de outros usuários"
+          />
         </Head>
         <AppContainer>
           <MainContainer>
