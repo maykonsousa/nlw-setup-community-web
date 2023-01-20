@@ -92,12 +92,20 @@ export const UserProvider = ({ children }: UserProviderProps) => {
       await OnLoadPage();
       Router.push("/ranking");
     }
+    if (error) {
+      Router.push("/");
+    }
     return { data, error };
   };
 
   const GetUserLoguedData = async () => {
-    const response = await GetUserByTokenService(`${cookieToken}`);
-    setUser(response);
+    try {
+      const response = await GetUserByTokenService(`${cookieToken}`);
+      setUser(response);
+    } catch (error) {
+      console.log(error);
+      Router.push("/");
+    }
   };
 
   const GetAllUsers = async () => {

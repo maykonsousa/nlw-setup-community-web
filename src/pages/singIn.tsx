@@ -10,16 +10,18 @@ import Link from "next/link";
 import { FormSignIn } from "../components/FormSignIn";
 import { parseCookies } from "nookies";
 import Router from "next/router";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 const SignIn = () => {
   const cookieToken = parseCookies().token;
+  const { user } = useContext(UserContext);
 
   useEffect(() => {
-    if (cookieToken) {
+    if (cookieToken && user?.id) {
       Router.push("/ranking");
     }
-  }, [cookieToken]);
+  }, [cookieToken, user]);
 
   return (
     <SignInContainer>

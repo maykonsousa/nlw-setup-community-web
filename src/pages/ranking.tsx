@@ -10,13 +10,13 @@ import { PageLoad } from "../components/PageLoad";
 
 export const Ranking = () => {
   const cookieToken = parseCookies().token;
-  const { pageLoad } = useContext(UserContext);
+  const { pageLoad, user } = useContext(UserContext);
 
   useEffect(() => {
-    if (!cookieToken) {
+    if (!cookieToken || !user?.id) {
       Router.push("/");
     }
-  }, [cookieToken]);
+  }, [cookieToken, user]);
   return pageLoad ? (
     <PageLoad />
   ) : (
